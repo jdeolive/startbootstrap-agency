@@ -18,7 +18,7 @@ var banner = ['/*!\n',
 
 // Compiles SCSS files from /scss into /css
 gulp.task('sass', function() {
-    return gulp.src('scss/agency.scss')
+    return gulp.src('scss/camba.scss')
         .pipe(sass())
         .pipe(header(banner, { pkg: pkg }))
         .pipe(gulp.dest('css'))
@@ -29,7 +29,7 @@ gulp.task('sass', function() {
 
 // Minify compiled CSS
 gulp.task('minify-css', ['sass'], function() {
-    return gulp.src('css/agency.css')
+    return gulp.src('css/camba.css')
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('css'))
@@ -40,7 +40,7 @@ gulp.task('minify-css', ['sass'], function() {
 
 // Minify custom JS
 gulp.task('minify-js', function() {
-    return gulp.src('js/agency.js')
+    return gulp.src(['js/agency.js', 'js/camba.js'])
         .pipe(uglify())
         .pipe(header(banner, { pkg: pkg }))
         .pipe(rename({ suffix: '.min' }))
@@ -74,6 +74,12 @@ gulp.task('copy', function() {
             '!node_modules/font-awesome/*.json'
         ])
         .pipe(gulp.dest('vendor/font-awesome'))
+
+    gulp.src(['node_modules/owl.carousel/dist/**/*'])
+        .pipe(gulp.dest('vendor/owl'))
+
+    gulp.src(['node_modules/animate.css/*.min.css'])
+        .pipe(gulp.dest('vendor/animate.css'))
 })
 
 // Default task

@@ -1,6 +1,9 @@
 (function($) {
     "use strict"; // Start of use strict
 
+    // var scrollBuffer = 
+    var scrollBuffer = ($(window).width() <= 768) ? -54 : 54
+
     // Smooth scrolling using jQuery easing
     $('a[href*="#"]:not([href="#"])').click(function() {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -8,7 +11,7 @@
             target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
             if (target.length) {
                 $('html, body').animate({
-                    scrollTop: (target.offset().top - 54)
+                    scrollTop: (target.offset().top + scrollBuffer)
                 }, 1000, "easeInOutExpo");
                 return false;
             }
@@ -34,5 +37,4 @@
             $("#mainNav").removeClass("navbar-shrink");
         }
     });
-
 })(jQuery); // End of use strict
